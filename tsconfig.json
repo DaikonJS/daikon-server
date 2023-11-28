@@ -1,0 +1,49 @@
+{
+  /*
+          TypeScript is being used to do type checking across both JavaScript and TypeScript files.
+          In particular, this picks up some problems in the JSDoc in the JavaScript files, and validates the code
+          is consistent with the JSDoc.
+           
+          The settings here are used by VSCode.
+          
+          See also tsconfig.js.json and tsconfig.ts.json.
+        */
+  /* Visit https://aka.ms/tsconfig to read more about tsconfig configuration. */
+  "compilerOptions": {
+    "lib": ["es2021"],
+    "module": "node16",
+    "target": "es2021",
+    "outDir": "dist/",
+    "moduleResolution": "Node16",
+
+    "allowJs": true,
+    "checkJs": false,
+    "declaration": true,
+    /* Strict by default, but dial it down to reduce churn in our JavaScript code. */
+    "strict": true,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "useUnknownInCatchVariables": false,
+
+    // "types": ["node", "jest"],
+    "noEmit": false /* just type checking and not emitting transpiled files */,
+    "skipLibCheck": true /* we want to check our hand crafted definitions */,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true /* common TypeScript config */
+  },
+
+  "include": [
+    /* TypeScript. Should match includes in tsconfig.ts.json. */
+    "src/**/*.ts",
+    "src/**/*.mts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "config",
+    "**/*.spec.ts",
+    "**/*.test.ts",
+    "**/*.cjs"
+  ]
+}

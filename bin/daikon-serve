@@ -1,0 +1,4 @@
+#!/bin/bash
+script_dir="$(dirname "$0")"
+daikon_bin="$script_dir/../dist/cli.js"
+node "$daikon_bin" "$@"
