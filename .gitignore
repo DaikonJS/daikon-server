@@ -1,0 +1,4 @@
+*.daikon
+config/*.daikon
+dist/
+node_modules/
