@@ -1,7 +1,7 @@
 import Daikon from "@daikonjs/core";
 import { program } from "commander";
 import { lstatSync, readFileSync, readdirSync } from "fs";
-import { serve } from "./serve";
+import { serve } from "./serve.js";
 
 // Define your program and its options
 program
@@ -24,9 +24,18 @@ const main = async () => {
       const files = readdirSync(options.input).filter((f) =>
         f.endsWith(".daikon")
       );
-      const daikons = files.reduce((acc, file) => {
+      const daikons = files.reduce(async (acc, file) => {
         const input = readFileSync(`${options.input}/${file}`, "utf8");
-        const daikon = new Daikon(input);
+        const daikon = new Daikon(
+          input,
+          {
+            rules: {
+              preserveNewlines: false,
+              preserveComments: false,
+            },
+          },
+          true
+        );
         return { ...acc, [file.replace(".daikon", "")]: daikon };
       }, {});
       await serve(daikons);
@@ -34,7 +43,16 @@ const main = async () => {
       const input = options.input
         ? readFileSync(options.input, "utf8")
         : options.string;
-      const daikon = new Daikon(input);
+      const daikon = new Daikon(
+        input,
+        {
+          rules: {
+            preserveNewlines: false,
+            preserveComments: false,
+          },
+        },
+        true
+      );
       await serve({ index: daikon });
     }
   }

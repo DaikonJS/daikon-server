@@ -12,7 +12,7 @@ export const serve = async (daikons: Record<string, Daikon<any>>) => {
     const prefix = name === "index" ? "" : `/${name}`;
 
     for (const slug of slugs) {
-      const path = `${prefix}/${slug}`;
+      const path = slug === "index" ? "/" : `${prefix}/${slug}`;
       console.log(`Serving ${path}`);
       app.get(path, async (req, res) => {
         const value = await daikon.get(slug);
